@@ -1,12 +1,12 @@
 # Pytorch Implementation of Conditional GAN 
 ### Usage
 ```bash
-$ python3 main.py --dataset 'mnist' --epoch 50
+$ python3 main.py --dataset 'mnist' --channel 1 --epochs 100
 ```
 NOTE: on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
-%run main.py --dataset 'mnist' --epoch 50
+%run main.py --dataset 'mnist' --channel 1 --epochs 50 
 ```
 ### References
 
