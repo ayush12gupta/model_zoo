@@ -22,3 +22,6 @@ data rather than G. Both G and D could be a non-linear mapping function, such as
 
 Minimax is a decision rule for minimizing the possible loss for a worst case (maximum loss) scenario. 
 The maximizer tries to get the highest score possible while the minimizer tries to do the opposite and get the lowest score possible.
+Under the game theory perspective, GAN can be viewed as a game of two players: thediscriminator D and the generator G. The discriminator tries to discriminate the generated
+(or fake) data and the real data, while the generator attempts to make the discriminator
+confusing by gradually generating the fake data that break into the real data. 
