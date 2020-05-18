@@ -1,12 +1,12 @@
 # Pytorch Implementation of Conditional GAN 
 ### Usage
 ```bash
-$ python3 main.py --dataset 'fmnist' --channel 1 --epochs 100
+$ python3 main.py --dataset 'cifar10' --channel 3 --epochs 100
 ```
 NOTE: on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
-%run main.py --dataset 'fmnist' --channel 1 --epochs 100 
+%run main.py --dataset 'cifar10' --channel 3 --epochs 100 
 ```
 ### References
 
