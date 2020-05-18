@@ -30,7 +30,8 @@ confusing by gradually generating the fake data that break into the real data.
 ## Conditional GAN
 
 Generative adversarial nets can be extended to a conditional model if both the generator and discriminator are conditioned on some extra information y. We can perform the conditioning by feeding y into the both the discriminator and generator as additional input layer. 
-In CGAN (Conditional GAN), labels act as an extension to the latent space z to generate and discriminate images better. Its structure can be gives as
+In CGAN (Conditional GAN), labels act as an extension to the latent space z to generate and discriminate images better. 
+Its structure can be shown as:
 
-![cGAN]
-(https://golden-storage-production.s3.amazonaws.com/topic_images/23a36a66d85947c7a0fe4a2ced52914e.png)
+
+![GAN](https://golden-storage-production.s3.amazonaws.com/topic_images/23a36a66d85947c7a0fe4a2ced52914e.png)
