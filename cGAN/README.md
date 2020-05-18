@@ -60,7 +60,7 @@ We simply give conditioning input and prior noise as inputs to the MLP architect
 ## On FastionMNIST Dataset
 
 Here is the loss graph
-Note: In this graph blue plot corresponds to generator loss and orange to discriminator loss
+> **_NOTE:_** In this graph blue plot corresponds to generator loss and orange to discriminator loss
 
 ![graph](https://github.com/ayush12gupta/model_zoo/blob/master/cGAN/plot%20(1).png)
 
@@ -74,7 +74,7 @@ Pretrained model of [generator](https://github.com/ayush12gupta/model_zoo/blob/m
 ## On CIFAR10 Dataset
 
 Here is the loss graph
-Note: In this graph blue plot corresponds to generator loss and orange to discriminator loss
+> **_NOTE:_** In this graph blue plot corresponds to generator loss and orange to discriminator loss
 
 ![graph](https://github.com/ayush12gupta/model_zoo/blob/master/cGAN/plot%20(2).png)
 
