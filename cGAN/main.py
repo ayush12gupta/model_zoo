@@ -92,10 +92,10 @@ def train(args, generator, discriminator, dataloader, loss, img_type,label_type,
             D_loss += d_loss.item()
 
            
-        print('Epoch {} || G_loss: {} || D_loss: {} || Time elapsed: {}'.format(epoch, G_loss / (i + 1), D_loss / (i + 1),time.time()-start_time))
+        print('Epoch {} || G_loss: {} || D_loss: {} || Time elapsed: {}'.format(epoch, G_loss / (i), D_loss / (i),time.time()-start_time))
         G_losses.append(G_loss / (i))
         D_losses.append(D_loss / (i))
-        sample_image(args,fix_noise,fix_label, epoch, generator)
+        image = sample_image(args,fix_noise,fix_label, epoch, generator)
 
         # Checkpoint
         torch.save(generator.state_dict(), args.outdir + 'generator_state/generator_{}_.pth'.format(epoch))
@@ -103,6 +103,7 @@ def train(args, generator, discriminator, dataloader, loss, img_type,label_type,
 
         plt.plot(G_losses, label='Generator')
         plt.plot(D_losses, label='Discriminator')
+        plt.legend()
         plt.savefig(args.outdir+"hello.png")
         plt.show()
 
@@ -164,11 +165,20 @@ def main():
     fix_labels = Variable(torch.LongTensor(fix_labels)).to('cuda:0')
 
     G_losses, D_losses = train(args,generator,discriminator,dataloader,loss, img_type, label_type,gen_optimizer,d_optimizer,fix_labels,fix_z)
-    
+
+    # Plotting the loss graph    
     plt.plot(G_losses, label='Generator')
     plt.plot(D_losses, label='Discriminator')
+    plt.legend()
     plt.savefig(args.outdir+"plot.png")
     plt.show()
+
+    # Making the GIF
+    image = []
+    for i in range(1,args.epochs+1):
+      image.append(imageio.imread(args.outdir+'Image/'+str(i)+'.png'))
+    imageio.mimsave(args.n_classes+'.gif', image)
+
 
 if __name__ == '__main__':
     main()
