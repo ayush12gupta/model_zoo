@@ -38,4 +38,4 @@ The content subspace models motion-independent appearance in videos, while the m
 
 ## Framework
 
-![frame](https://www.semanticscholar.org/paper/MoCoGAN%3A-Decomposing-Motion-and-Content-for-Video-Tulyakov-Liu/e76edb86f270c3a77ed9f5a1e1b305461f36f96f/figure/2)
+![frame](https://d3i71xaburhd42.cloudfront.net/e76edb86f270c3a77ed9f5a1e1b305461f36f96f/4-Figure2-1.png)
