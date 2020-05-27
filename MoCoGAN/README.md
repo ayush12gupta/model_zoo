@@ -1,5 +1,12 @@
 # Pytorch Implementation of MoCoGAN 
 ## Usage
+We are using [this dataset](http://www.wisdom.weizmann.ac.il/%7Evision/SpaceTimeActions.html) which you need to extact and place all the files in data. 
+
+We need to resize the dataset by following command:
+```bash
+$ python3 resize,py
+```
+
 ```bash
 $ python3 main.py --ndata 'cifar10' --epochs 100
 ```
@@ -44,3 +51,7 @@ respectively, sampled from the training set v and the generated set v˜. The fun
 video, S<sub>T</sub> samples T consequtive frames.
 
 ![img](https://d3i71xaburhd42.cloudfront.net/e76edb86f270c3a77ed9f5a1e1b305461f36f96f/4-Figure2-1.png)
+
+## Implementation
+
+We implement this model on Weizmann database.
