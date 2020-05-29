@@ -58,4 +58,4 @@ We implement this model on Weizmann database.
 
 ## Results
 
-| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif.gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(2).gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif (1).gif)| 
+| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif.gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(2).gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(1).gif)| 
