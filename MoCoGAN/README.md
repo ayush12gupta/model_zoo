@@ -11,7 +11,7 @@ $ python3 main.py --epochs 40000
 ```python
 !git clone link-to-repo
 %run resize.py
-%run main.py --ndata 'cifar10' --epochs 100 
+%run main.py --epochs 40000
 ```
 
 ## Contributed by:
