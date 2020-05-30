@@ -1,18 +1,16 @@
 # Pytorch Implementation of MoCoGAN 
 ## Usage
-We are using [this dataset](http://www.wisdom.weizmann.ac.il/%7Evision/SpaceTimeActions.html) which you need to extact and place all the files in data. 
 
-We need to resize the dataset by following command:
+We are using [this dataset](http://www.wisdom.weizmann.ac.il/%7Evision/SpaceTimeActions.html) which you need to extact and place all the files in a file named data. 
+
 ```bash
 $ python3 resize,py
-```
-
-```bash
-$ python3 main.py --ndata 'cifar10' --epochs 100
+$ python3 main.py --epochs 40000
 ```
 > **_NOTE:_** on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
+%run resize.py
 %run main.py --ndata 'cifar10' --epochs 100 
 ```
 
@@ -48,13 +46,107 @@ The content subspace models motion-independent appearance in videos, while the m
 For a video, the content vector, zC, is sampled once and fixed. Then, a series of random variables[e<sup>(1)</sup>, ..., e<sup>(K)</sup>] is sampled and mapped to a series of motioncodes [z<sup>(1)</sup><sub>M</sub>,...,z<sup>(K)</sup><sub>M</sub>] via the recurrent neural network R<sub>M</sub>. We implement RM using a
 one-layer GRU network. A generator GI produces a frame, x˜<sup>(k)</sup>, using the content and the motion vectors {z<sub>C</sub>, z<sup>(K)</sup><sub>M</sub> }. The discriminators, D<sub>I</sub> and D<sub>V</sub>, are trained on real and fake images and videos,
 respectively, sampled from the training set v and the generated set v˜. The function S<sub>1</sub> samples a single frame from a
-video, S<sub>T</sub> samples T consequtive frames. The framework can be seen
+video, S<sub>T</sub> samples T consequtive frames. 
 
 ![img](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101574503_3226320640922153_3481496598897229824_n.jpg = 200x190)
 
-## Implementation
 
-We implement this model on Weizmann database.
+
+## Implementation and Model Architecture
+
+We implement this model on Weizmann database. 
+
+- We train our model for 40000 epoch 
+- We use BCE loss(Binary Crossentropy loss) with a learning rate of 0.0002
+- We test the model by generating images for a fixed randomly generated noise and label
+
+## Generator
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+   ConvTranspose2d-1            [-1, 512, 6, 6]       1,105,920
+       BatchNorm2d-2            [-1, 512, 6, 6]           1,024
+              ReLU-3            [-1, 512, 6, 6]               0
+   ConvTranspose2d-4          [-1, 256, 12, 12]       2,097,152
+       BatchNorm2d-5          [-1, 256, 12, 12]             512
+              ReLU-6          [-1, 256, 12, 12]               0
+   ConvTranspose2d-7          [-1, 128, 24, 24]         524,288
+       BatchNorm2d-8          [-1, 128, 24, 24]             256
+              ReLU-9          [-1, 128, 24, 24]               0
+  ConvTranspose2d-10           [-1, 64, 48, 48]         131,072
+      BatchNorm2d-11           [-1, 64, 48, 48]             128
+             ReLU-12           [-1, 64, 48, 48]               0
+  ConvTranspose2d-13            [-1, 3, 96, 96]           3,072
+             Tanh-14            [-1, 3, 96, 96]               0
+================================================================
+Total params: 3,863,424
+Trainable params: 3,863,424
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 6.75
+Params size (MB): 14.74
+Estimated Total Size (MB): 21.49
+----------------------------------------------------------------
+```
+
+### Image Discriminator
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1           [-1, 64, 48, 48]           3,072
+         LeakyReLU-2           [-1, 64, 48, 48]               0
+            Conv2d-3          [-1, 128, 24, 24]         131,072
+         LeakyReLU-4          [-1, 128, 24, 24]               0
+            Conv2d-5          [-1, 256, 12, 12]         524,288
+         LeakyReLU-6          [-1, 256, 12, 12]               0
+            Conv2d-7            [-1, 512, 6, 6]       2,097,152
+         LeakyReLU-8            [-1, 512, 6, 6]               0
+            Conv2d-9              [-1, 1, 1, 1]          18,432
+          Sigmoid-10              [-1, 1, 1, 1]               0
+================================================================
+Total params: 2,774,016
+Trainable params: 2,774,016
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.11
+Forward/backward pass size (MB): 4.22
+Params size (MB): 10.58
+Estimated Total Size (MB): 14.91
+----------------------------------------------------------------
+```
+
+### Video Discriminator
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv3d-1        [-1, 64, 8, 48, 48]          12,288
+         LeakyReLU-2        [-1, 64, 8, 48, 48]               0
+            Conv3d-3       [-1, 128, 4, 24, 24]         524,288
+       BatchNorm3d-4       [-1, 128, 4, 24, 24]             256
+         LeakyReLU-5       [-1, 128, 4, 24, 24]               0
+            Conv3d-6       [-1, 256, 2, 12, 12]       2,097,152
+       BatchNorm3d-7       [-1, 256, 2, 12, 12]             512
+         LeakyReLU-8       [-1, 256, 2, 12, 12]               0
+            Conv3d-9         [-1, 512, 1, 6, 6]       8,388,608
+      BatchNorm3d-10         [-1, 512, 1, 6, 6]           1,024
+        LeakyReLU-11         [-1, 512, 1, 6, 6]               0
+           Linear-12                    [-1, 1]          18,433
+          Sigmoid-13                    [-1, 1]               0
+================================================================
+Total params: 11,042,561
+Trainable params: 11,042,561
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 1.69
+Forward/backward pass size (MB): 26.86
+Params size (MB): 42.12
+Estimated Total Size (MB): 70.67
+----------------------------------------------------------------
+```
 
 ## Results
 
