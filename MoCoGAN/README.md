@@ -52,7 +52,7 @@ video, S<sub>T</sub> samples T consequtive frames.
 
 We train MoCoGAN using the alternating gradient update algorithm as in. In one step, we update D<sub>I</sub> and D<sub>V</sub> while fixing G<sub>I</sub> and R<sub>M</sub>. In the alternating step, we update G<sub>I</sub> and R<sub>M</sub> while fixing D<sub>I</sub> and D<sub>V</sub> using a min-max game with value function F<sub>V</sub>(D<sub>I</sub>,D<sub>V</sub>,G<sub>I</sub> and R<sub>M</sub>)
 
-
+<img src="https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101062734_558005641575327_6046969998902034432_n.jpg" height="180" width="400">
 
 ## Implementation and Model Architecture
 
