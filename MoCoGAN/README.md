@@ -48,9 +48,9 @@ The content subspace models motion-independent appearance in videos, while the m
 For a video, the content vector, zC, is sampled once and fixed. Then, a series of random variables[e<sup>(1)</sup>, ..., e<sup>(K)</sup>] is sampled and mapped to a series of motioncodes [z<sup>(1)</sup><sub>M</sub>,...,z<sup>(K)</sup><sub>M</sub>] via the recurrent neural network R<sub>M</sub>. We implement RM using a
 one-layer GRU network. A generator GI produces a frame, x˜<sup>(k)</sup>, using the content and the motion vectors {z<sub>C</sub>, z<sup>(K)</sup><sub>M</sub> }. The discriminators, D<sub>I</sub> and D<sub>V</sub>, are trained on real and fake images and videos,
 respectively, sampled from the training set v and the generated set v˜. The function S<sub>1</sub> samples a single frame from a
-video, S<sub>T</sub> samples T consequtive frames.
+video, S<sub>T</sub> samples T consequtive frames. The framework can be seen
 
-![img](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101574503_3226320640922153_3481496598897229824_n.jpg)
+![img](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101574503_3226320640922153_3481496598897229824_n.jpg = 200x190)
 
 ## Implementation
 
