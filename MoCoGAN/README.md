@@ -50,7 +50,7 @@ one-layer GRU network. A generator GI produces a frame, x˜<sup>(k)</sup>, using
 respectively, sampled from the training set v and the generated set v˜. The function S<sub>1</sub> samples a single frame from a
 video, S<sub>T</sub> samples T consequtive frames.
 
-![img](https://d3i71xaburhd42.cloudfront.net/e76edb86f270c3a77ed9f5a1e1b305461f36f96f/4-Figure2-1.png)
+![img](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101574503_3226320640922153_3481496598897229824_n.jpg)
 
 ## Implementation
 
