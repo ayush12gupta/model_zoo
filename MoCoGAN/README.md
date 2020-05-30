@@ -54,6 +54,8 @@ We train MoCoGAN using the alternating gradient update algorithm as in. In one s
 
 <img src="https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101062734_558005641575327_6046969998902034432_n.jpg" height="180" width="400">
 
+In this objective function the first and second terms helps to train the Image Discriminator so that it can generate 1 for images samples from real videos and zero for those from fake videos. Similarly the third and fourth term help us to train the Video Discriminator.
+
 ## Implementation and Model Architecture
 
 We implement this model on Weizmann database.
