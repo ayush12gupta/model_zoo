@@ -50,17 +50,17 @@ video, S<sub>T</sub> samples T consequtive frames.
 
 <img src="https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101574503_3226320640922153_3481496598897229824_n.jpg" height="390" width="400">
 
-We train MoCoGAN using the alternating gradient update algorithm as in. In one step, we update D<sub>I</sub> and D<sub>V</sub> while fixing G<sub>I</sub> and R<sub>M</sub>. In the alternating step, we update G<sub>I</sub> and R<sub>M</sub> while fixing D<sub>I</sub> and D<sub>V</sub> using a min-max game with value function F<sub>V</sub>(D<sub>I</sub>,D<sub>V</sub>,G<sub>I</sub> and R<sub>M</sub>)
+We train MoCoGAN using the alternating gradient update algorithm as in. In one step, we update D<sub>I</sub> and D<sub>V</sub> while fixing G<sub>I</sub> and R<sub>M</sub>. In the alternating step, we update G<sub>I</sub> and R<sub>M</sub> while fixing D<sub>I</sub> and D<sub>V</sub> using a min-max game with value function F<sub>V</sub>(D<sub>I</sub>,D<sub>V</sub>,G<sub>I</sub>,R<sub>M</sub>)
 
 <img src="https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101062734_558005641575327_6046969998902034432_n.jpg" height="180" width="400">
 
 ## Implementation and Model Architecture
 
-We implement this model on Weizmann database. 
+We implement this model on Weizmann database.
 
 - We train our model for 40000 epoch 
 - We use BCE loss(Binary Crossentropy loss) with a learning rate of 0.0002
-- We test the model by generating images for a fixed randomly generated noise and label
+- We test the model by generating videos from a randomly generated set of epsilon and Z<sub>C</sub>
 
 ## Generator
 ```
@@ -151,5 +151,7 @@ Estimated Total Size (MB): 70.67
 ```
 
 ## Results
+
+Some of the good generated videos given as follows:
 
 | ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif.gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(2).gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(1).gif)| 
