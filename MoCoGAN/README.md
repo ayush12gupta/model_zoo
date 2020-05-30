@@ -27,6 +27,11 @@ $ python3 main.py --epochs 40000
 
 # Summary 
 
+## Introduction
+
+Visual signals in a video can be divided into content and motions. Content specifies which object is in the video, motion describes their dynamics. Based on this MoCoGAN framework was proposed. This proposed framework generates a video by mapping a sequence of randomly generated vectors to a sequence of video frames. Each randomly generated vector consists of a motion part, and a content part.
+
+To learn motion and content in an unsupervised manner we introduce an adverserial learning scheme utilizing both image and video discriminator.
 
 ## GANs
 
