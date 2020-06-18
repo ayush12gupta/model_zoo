@@ -67,3 +67,7 @@ on 3 × 3 spatial region across 64 channels (feature maps). The last layer,
 used for image reconstruction, consists of a single filter of size 3 × 3 × 64.
 
 ![image](https://www.researchgate.net/publication/334653242/figure/fig2/AS:784189184028680@1563976679849/Network-structure-of-VDSR-used-in-this-paper-ILR-interpolated-low-resolution-image.png)
+
+The network takes an interpolated low-resolution image as input and predicts image details.
+One problem with using a very deep network to predict dense outputs is that the size of the feature map gets reduced every time convolution operations are applied.
+This is in accordance with other super-resolution methods since many require surrounding pixels to infer center pixels correctly. This center-surround relation is useful since the surrounding region provides more constraints to this ill-posed problem (SR)
