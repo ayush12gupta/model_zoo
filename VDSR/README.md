@@ -58,3 +58,12 @@ Moreover our initial learning rate is 10000 times higher than that of SRCNN, whi
 
 Training and storing many scale-dependent models in preparation for all possible scenarios is impractical.
 We find a single convolutional network is sufficient for multi-scalefactor super-resolution.
+
+## Model Architecture
+
+For SR image reconstruction, we use a very deep convolutional network we use 20 layers
+where, layers except the first and the last are of the same type: 64 filter of the size 3 × 3 × 64, where a filter operates
+on 3 × 3 spatial region across 64 channels (feature maps). The last layer,
+used for image reconstruction, consists of a single filter of size 3 × 3 × 64.
+
+![image](https://www.researchgate.net/publication/334653242/figure/fig2/AS:784189184028680@1563976679849/Network-structure-of-VDSR-used-in-this-paper-ILR-interpolated-low-resolution-image.png)
