@@ -70,4 +70,5 @@ used for image reconstruction, consists of a single filter of size 3 × 3 × 64.
 
 The network takes an interpolated low-resolution image as input and predicts image details.
 One problem with using a very deep network to predict dense outputs is that the size of the feature map gets reduced every time convolution operations are applied.
-This is in accordance with other super-resolution methods since many require surrounding pixels to infer center pixels correctly. This center-surround relation is useful since the surrounding region provides more constraints to this ill-posed problem (SR)
+This is in accordance with other super-resolution methods since many require surrounding pixels to infer center pixels correctly. This center-surround relation is useful since the surrounding region provides more constraints to this ill-posed problem (SR).
+To resolve this issue, we pad zeros before convolutions to keep the sizes of all feature maps (including the output image) the same
