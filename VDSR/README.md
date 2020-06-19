@@ -110,8 +110,14 @@ To resolve this issue, we pad zeros before convolutions to keep the sizes of all
 
 ## Implementation
 
-We first preprocess the dataset 91I so as to produce data argumented images by ratating, flipping and producing images of different scales(x2 , x3, x4) so as to support multi scale SR, and produce images of 41x41 dimension. 
+We first preprocess the dataset 291I so as to produce data argumented images by ratating, flipping and producing images of different scales(x2 , x3, x4) so as to support multi scale SR, and produce images of 41x41 dimension. 
 We train our model using  MSE Loss for 50 epochs and appling gradient clipping.
 
 ## Result
 
+**Ground Truth Image**
+![gt](https://github.com/ayush12gupta/model_zoo/blob/master/VDSR/assets/GT.png)
+**4x scaled Input Image**
+![input](https://github.com/ayush12gupta/model_zoo/blob/master/VDSR/assets/27f2fa07-27ff-4fed-bf4b-831475c46eb0.png)
+**Super Resolution Output Image**
+![out](https://github.com/ayush12gupta/model_zoo/blob/master/VDSR/assets/img.png)
