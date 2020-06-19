@@ -138,7 +138,5 @@ def eval( model, ):
     ax.set_title("Output(vdsr)")
     plt.show()
 
-
-
 if __name__ == '__main__':
     main()
