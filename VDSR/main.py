@@ -129,13 +129,16 @@ def eval( model, ):
     im_gt = Image.fromarray(im_gt_ycbcr, "YCbCr").convert("RGB")
     im_b = Image.fromarray(im_b_ycbcr, "YCbCr").convert("RGB")
 
-    ax = plt.subplot("132")
-    ax.imshow(im_b)
-    ax.set_title("Input(bicubic)")
-
-    ax = plt.subplot("133")
-    ax.imshow(out_img)
-    ax.set_title("Output(vdsr)")
+    plt.imshow(im_gt)
+    plt.savefig("GT.png")
+    plt.show()
+    
+    plt.imshow(im_b)
+    plt.savefig("Input.png")
+    plt.show()
+    
+    plt.imshow(im_h)
+    plt.savefig("img.png")
     plt.show()
 
 if __name__ == '__main__':
