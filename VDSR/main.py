@@ -10,7 +10,6 @@ from PIL import Image
 import numpy as np
 import time
 import matplotlib.pyplot as plt
-
 from model import VDSR
 from util import *
 
@@ -28,9 +27,10 @@ def main():
     parser.add_argument("--clip", type=float, default=0.4, help="Clipping Gradients. Default=0.4")
     parser.add_argument("--threads", type=int, default=1, help="Number of threads for data loader to use, Default: 1")
     parser.add_argument("--momentum", default=0.9, type=float, help="Momentum, Default: 0.9")
-    parser.add_argument("--weight-decay", "--wd", default=1e-4, type=float, help="Weight decay, Default: 1e-4")
-    parser.add_argument('--pretrained', default='', type=str, help='path to pretrained model (default: none)')
-
+    parser.add_argument("--weight-decay", default=1e-4, type=float, help="Weight decay, Default: 1e-4")
+    parser.add_argument("--pretrained", default='', type=str, help="Path to pretrained model")
+    parser.add_argument("--train_data", required=True, type=str, help="Path to preprocessed train dataset")
+    parser.add_argument("--test_data", default="./assets/", type=str, help="Path to file containing test images")
     args = parser.parse_args()
 
     cuda = args.cuda
@@ -48,11 +48,9 @@ def main():
 
     cudnn.benchmark = True
 
-    print("===> Loading datasets")
     train_set = prepareDataset("data/train.h5")
     train_data = DataLoader(dataset=train_set, num_workers=args.threads, batch_size=args.batchSize, shuffle=True)
 
-    print("===> Building model")
     model = VDSR()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
     criterion = nn.MSELoss(size_average=False)
@@ -67,10 +65,10 @@ def main():
             args.start_epoch = checkpoint["epoch"] + 1
             model.load_state_dict(checkpoint['model'].state_dict())
         else:
-            print("=> no model found at '{}'".format(opt.pretrained))
+            print("No model found at '{}'".format(opt.pretrained))
 
     train(args.start_epoch, train_data, optimizer, model, criterion, args.Epochs, args)
-    eval(model)
+    eval(model, args)
 
 
 def train(start_epoch, dataloader, optimizer, model, criterion, Epoch, args):
@@ -95,14 +93,14 @@ def train(start_epoch, dataloader, optimizer, model, criterion, Epoch, args):
             optimizer.step()
 
             if i % 100 == 0:
-                print("===> Epoch[{}]({}/{}): Loss: {:.10f}".format(epoch, i, len(dataloader), loss.data[0]))
+                print("Epoch[{}]({}/{}): Loss: {:.10f}".format(epoch, i, len(dataloader), loss.data[0]))
 
         if epoch % 2 == 0:
             save_checkpoint(model, epoch)
 
-def eval( model, ):
-    im_gt = Image.open("Set5/butterfly_GT.bmp").convert("RGB")
-    im_b = Image.open("Set5/butterfly_GT_scale_4.bmp").convert("RGB")
+def eval( model, args):
+    im_gt = Image.open(args.test_data+"butterfly_GT.bmp").convert("RGB")
+    im_b = Image.open(args.test_data+"butterfly_GT_scale_4.bmp").convert("RGB")
     # Convert the images into YCbCr mode and extraction the Y channel (for PSNR calculation)
     im_gt_ycbcr = np.array(im_gt.convert("YCbCr"))
     im_b_ycbcr = np.array(im_b.convert("YCbCr"))
