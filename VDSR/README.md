@@ -71,4 +71,12 @@ used for image reconstruction, consists of a single filter of size 3 × 3 × 64.
 The network takes an interpolated low-resolution image as input and predicts image details.
 One problem with using a very deep network to predict dense outputs is that the size of the feature map gets reduced every time convolution operations are applied.
 This is in accordance with other super-resolution methods since many require surrounding pixels to infer center pixels correctly. This center-surround relation is useful since the surrounding region provides more constraints to this ill-posed problem (SR).
-To resolve this issue, we pad zeros before convolutions to keep the sizes of all feature maps (including the output image) the same
+To resolve this issue, we pad zeros before convolutions to keep the sizes of all feature maps the same.
+
+## Implementation
+
+We first preprocess the dataset 91I so as to produce data argumented images by ratating, flipping and producing images of different scales(x2 , x3, x4) so as to support multi scale SR, and produce images of 41x41 dimension. 
+We train our model using  MSE Loss for 50 epochs and appling gradient clipping.
+
+## Result
+
