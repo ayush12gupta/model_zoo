@@ -15,7 +15,7 @@ $ python3 main.py --Epochs 100
 ```
 ```
 usage: main.py [-h] [--batchSize BATCHSIZE] [--Epochs EPOCHS] [--lr LR]
-               [--step STEP] [--resume RESUME] [--start-epoch START_EPOCH]
+               [--step STEP] [--start-epoch START_EPOCH]
                [--cuda] [--clip CLIP] [--threads THREADS]
                [--momentum MOMENTUM] [--weight-decay WEIGHT_DECAY]
                [--pretrained PRETRAINED]
@@ -28,7 +28,6 @@ optional arguments:
   --lr LR               Learning Rate. Default=0.1
   --step STEP           Sets the learning rate to the initial LR decayed by
                         momentum every n epochs, Default: n=10
-  --resume RESUME       Path to checkpoint (default: none)
   --start-epoch START_EPOCH
                         Manual epoch number (useful on restarts)
   --cuda                Use cuda?
