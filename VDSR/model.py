@@ -2,11 +2,6 @@ import torch
 import torch.nn as nn
 from math import sqrt
 
-# class Block(nn.Module):
-#     def __init__(self):
-#         super(Block, self).__init__()
-#         self.conv = nn.Conv2d
-
 class VDSR(nn.Module):
     def __init__(self):
         super(VDSR, self).__init__()
