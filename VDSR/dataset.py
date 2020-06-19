@@ -11,18 +11,19 @@ def prepare_data(path):
     names = os.listdir(path)
     names = sorted(names)
     nums = names.__len__()
-
-    data = np.zeros((size_input, size_input, 1, 432968), dtype=np.double)
-    label = np.zeros((size_label, size_label, 1, 432968), dtype=np.double)
-
+    print(nums)
+    data = np.zeros((1, size_input, size_input), dtype=np.double)
+    label = np.zeros((1, size_label, size_label), dtype=np.double)
+    #global data, label
     for i in range(nums):
         for flip in range(2):
             for degree in range(4):
                 for scale in scales:
 
                     name = path + names[i]
+                    #print(name)
                     hr_img = cv2.imread(name, cv2.IMREAD_COLOR)
-                    #shape = hr_img.shape
+                    #hr_img = io.imread(name)
                     hr_img = cv2.cvtColor(hr_img, cv2.IMREAD_COLOR)
                     hr_img = cv2.flip(hr_img, flip)
 
@@ -56,20 +57,39 @@ def prepare_data(path):
                             for y in range(0, wid-size_input, stride):
 
                                 subim_input = im_input[x:x+size_input, y:y+size_input]
+                                subim_input = np.expand_dims(subim_input, axis=0)
                                 subim_label = im_label[x:x+size_label, y:y+size_label]
+                                subim_label = np.expand_dims(subim_label, axis=0)
+                                #print(subim_input.shape)
                                 # print(subim_input.shape,"   ",subim_label.shape,"  --",im_input.shape,"  ",scale)
                                 #if (subim_label.shape == (41,41)).all() and (subim_input== (41,41)).all():
-                                data[:,:,0,count] = subim_input
-                                #print(subim_label.shape)
-                                label[:,:,0,count] = subim_label
+                                # data[:,:,0,count] = subim_input
+                                # #print(subim_label.shape)
+                                # label[:,:,0,count] = subim_label
+                                
+                                if count == 0:
+                                  label = subim_label
+                                  count += 1
+                                  continue
+                                print(label.shape,subim_label.shape)
+                                label = np.vstack((label, subim_label))
+                                
+                                if count == 0:
+                                  data = subim_input
+                                  count += 1
+                                  continue
+                                print(data.shape,subim_input.shape)
+                                data = np.vstack((data, subim_input))
+                                # print(data.shape)
                                 # data.append(np.expand_dims(subim_input,axis=2))
-                                # label.append(np.expand_dims(subim_label,axis=2))
+                                #label.append(np.expand_dims(subim_label,axis=2))
                                 count += 1
+                                print(data.shape,"  ",count,label.shape)
 
     order = np.random.permutation(count)
     print(count)
-    # data = np.reshape(np.array(data),(41,41,1,count))
-    # label = np.reshape(np.array(label), (41, 41, 1, count))
+    data = np.reshape(np.array(data),(41,41,1,count))
+    label = np.reshape(np.array(label), (41, 41, 1, count))
     # label = np.array(label)
     data = np.take(data, order, axis=3)
     label = np.take(label, order, axis=3)
