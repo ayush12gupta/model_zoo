@@ -1,15 +1,9 @@
 import os
+import argparse
 import cv2
 import h5py
 import numpy as np
 from util import *
-
-size_input = 41
-size_label = 41
-DATA_PATH = './291/'
-stride = 41
-scales = [2,3,4]
-downsizes = [1,0.7,0.5]
 
 def prepare_data(path):
 
@@ -94,6 +88,17 @@ def write_hdf5(data, label, file):
         h.create_dataset('label', data=y)
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dir", type=str, required=True, help="path to the dataset directory")
+    args = parser.parse_args()
+
+    DATA_PATH = args.dir
+    size_input = 41
+    size_label = 41
+    stride = 41
+    scales = [2, 3, 4]
+    downsizes = [1, 0.7, 0.5]
+
     print("preparing data")
     data, label = prepare_data(DATA_PATH)
     print("storing data")

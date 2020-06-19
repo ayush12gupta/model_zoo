@@ -58,3 +58,7 @@ def im2double(im):
     max_val = np.max(im.ravel())
     out = (im.astype('float') - min_val) / (max_val - min_val)
     return out
+
+def adjust_learning_rate(optimizer, epoch, args):
+    lr = args.lr * (0.1 ** (epoch // args.step))
+    return lr

@@ -1,4 +1,4 @@
-import argparse, os
+import argparse
 import torch
 import random
 import torch.backends.cudnn as cudnn
@@ -8,7 +8,7 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader
 from PIL import Image
 import numpy as np
-import time, math
+import time
 import matplotlib.pyplot as plt
 
 from model import VDSR
@@ -23,7 +23,6 @@ def main():
     parser.add_argument("--lr", type=float, default=0.1, help="Learning Rate. Default=0.1")
     parser.add_argument("--step", type=int, default=10,
                         help="Sets the learning rate to the initial LR decayed by momentum every n epochs, Default: n=10")
-    parser.add_argument("--resume", default="", type=str, help="Path to checkpoint (default: none)")
     parser.add_argument("--start-epoch", default=1, type=int, help="Manual epoch number (useful on restarts)")
     parser.add_argument("--cuda", action="store_true", help="Use cuda?")
     parser.add_argument("--clip", type=float, default=0.4, help="Clipping Gradients. Default=0.4")
@@ -70,13 +69,18 @@ def main():
         else:
             print("=> no model found at '{}'".format(opt.pretrained))
 
-    train(train_data, optimizer, model, criterion, args.Epochs, args)
+    train(args.start_epoch, train_data, optimizer, model, criterion, args.Epochs, args)
     eval(model)
 
 
-def train(dataloader, optimizer, model, criterion, Epoch, args):
-    for epoch in range(1, Epoch+1):
+def train(start_epoch, dataloader, optimizer, model, criterion, Epoch, args):
+    for epoch in range(start_epoch, Epoch+1):
+        lr = adjust_learning_rate(optimizer, epoch - 1, args)
 
+        for param_group in optimizer.param_groups:
+            param_group["lr"] = lr
+
+        model.train()
         for i, batch in enumerate(dataloader, 1):
             input, target = Variable(batch[0]), Variable(batch[1], requires_grad=False)
 
