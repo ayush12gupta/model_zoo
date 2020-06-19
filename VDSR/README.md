@@ -13,7 +13,33 @@ $ python3 main.py --Epochs 100
 %run dataset.py
 %run main.py --Epochs 100
 ```
+```
+usage: main.py [-h] [--batchSize BATCHSIZE] [--Epochs EPOCHS] [--lr LR]
+               [--step STEP] [--resume RESUME] [--start-epoch START_EPOCH]
+               [--cuda] [--clip CLIP] [--threads THREADS]
+               [--momentum MOMENTUM] [--weight-decay WEIGHT_DECAY]
+               [--pretrained PRETRAINED]
 
+optional arguments:
+  -h, --help            show this help message and exit
+  --batchSize BATCHSIZE
+                        Training batch size
+  --Epochs EPOCHS       Number of epochs to train for
+  --lr LR               Learning Rate. Default=0.1
+  --step STEP           Sets the learning rate to the initial LR decayed by
+                        momentum every n epochs, Default: n=10
+  --resume RESUME       Path to checkpoint (default: none)
+  --start-epoch START_EPOCH
+                        Manual epoch number (useful on restarts)
+  --cuda                Use cuda?
+  --clip CLIP           Clipping Gradients. Default=0.4
+  --threads THREADS     Number of threads for data loader to use, Default: 1
+  --momentum MOMENTUM   Momentum, Default: 0.9
+  --weight-decay WEIGHT_DECAY, --wd WEIGHT_DECAY
+                        Weight decay, Default: 1e-4
+  --pretrained PRETRAINED
+                        path to pretrained model (default: none)
+```
 ## Contributed by:
 * [Ayush Gupta](https://github.com/ayush12gupta)
 
