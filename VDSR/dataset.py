@@ -11,19 +11,16 @@ def prepare_data(path):
     names = os.listdir(path)
     names = sorted(names)
     nums = names.__len__()
-    print(nums)
+
     data = np.zeros((1, size_input, size_input), dtype=np.double)
     label = np.zeros((1, size_label, size_label), dtype=np.double)
-    #global data, label
     for i in range(nums):
         for flip in range(2):
             for degree in range(4):
                 for scale in scales:
 
                     name = path + names[i]
-                    #print(name)
                     hr_img = cv2.imread(name, cv2.IMREAD_COLOR)
-                    #hr_img = io.imread(name)
                     hr_img = cv2.cvtColor(hr_img, cv2.IMREAD_COLOR)
                     hr_img = cv2.flip(hr_img, flip)
 
@@ -40,19 +37,13 @@ def prepare_data(path):
                         hr_img = cv2.cvtColor(hr_img, cv2.COLOR_BGR2YCrCb)
                         hr_img = im2double(hr_img[:, :, 0])
                         shape = hr_img.shape
-                        # print(hr_img.shape)
                         height = shape[0]
                         width = shape[1]
 
                         im_label = hr_img[0:height - (height % scale), 0:width - (width % scale)]
-                        # print(im_label.shape)
                         [hei, wid] = im_label.shape
-                        #print(hei," ",wid)
                         im_input = cv2.resize(im_label, (wid//scale, hei//scale), cv2.INTER_CUBIC)
-                        # print(im_input.shape)
                         im_input = cv2.resize(im_input, (wid, hei), cv2.INTER_CUBIC)
-                        # print(im_label.shape)
-                        # print(im_input.shape)
                         for x in range(0, hei-size_input, stride):
                             for y in range(0, wid-size_input, stride):
 
@@ -60,12 +51,6 @@ def prepare_data(path):
                                 subim_input = np.expand_dims(subim_input, axis=0)
                                 subim_label = im_label[x:x+size_label, y:y+size_label]
                                 subim_label = np.expand_dims(subim_label, axis=0)
-                                #print(subim_input.shape)
-                                # print(subim_input.shape,"   ",subim_label.shape,"  --",im_input.shape,"  ",scale)
-                                #if (subim_label.shape == (41,41)).all() and (subim_input== (41,41)).all():
-                                # data[:,:,0,count] = subim_input
-                                # #print(subim_label.shape)
-                                # label[:,:,0,count] = subim_label
                                 
                                 if count == 0:
                                   label = subim_label
@@ -80,9 +65,6 @@ def prepare_data(path):
                                   continue
                                 print(data.shape,subim_input.shape)
                                 data = np.vstack((data, subim_input))
-                                # print(data.shape)
-                                # data.append(np.expand_dims(subim_input,axis=2))
-                                #label.append(np.expand_dims(subim_label,axis=2))
                                 count += 1
                                 print(data.shape,"  ",count,label.shape)
 
@@ -90,12 +72,9 @@ def prepare_data(path):
     print(count)
     data = np.reshape(np.array(data),(41,41,1,count))
     label = np.reshape(np.array(label), (41, 41, 1, count))
-    # label = np.array(label)
     data = np.take(data, order, axis=3)
     label = np.take(label, order, axis=3)
-    # data = np.expand_dims(data, axis=2)
-    # label = np.expand_dims(label, axis=2)
-
+    
     return data, label
 
 def write_hdf5(data, label, file):
