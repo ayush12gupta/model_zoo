@@ -89,6 +89,7 @@ def write_hdf5(data, label, file):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--dir", type=str, required=True, help="path to the dataset directory")
+    parser.add_argument("--out_dir", type=str, required=True, help="path to the output dataset directory")
     args = parser.parse_args()
 
     DATA_PATH = args.dir
@@ -96,7 +97,6 @@ if __name__ == '__main__':
     size_label = 41
     stride = 41
     scales = [2, 3, 4]
-    downsizes = [1, 0.7, 0.5]
 
     print("preparing data")
     data, label = prepare_data(DATA_PATH)
