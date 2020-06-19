@@ -25,10 +25,10 @@ optional arguments:
 **Arguments for main.py**
 ```
 usage: main.py [-h] [--batchSize BATCHSIZE] [--Epochs EPOCHS] [--lr LR]
-               [--step STEP] [--start-epoch START_EPOCH]
-               [--cuda] [--clip CLIP] [--threads THREADS]
-               [--momentum MOMENTUM] [--weight-decay WEIGHT_DECAY]
-               [--pretrained PRETRAINED]
+               [--step STEP] [--start-epoch START_EPOCH] [--cuda]
+               [--clip CLIP] [--threads THREADS] [--momentum MOMENTUM]
+               [--weight-decay WEIGHT_DECAY] [--pretrained PRETRAINED]
+               --train_data TRAIN_DATA [--test_data TEST_DATA]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -44,10 +44,14 @@ optional arguments:
   --clip CLIP           Clipping Gradients. Default=0.4
   --threads THREADS     Number of threads for data loader to use, Default: 1
   --momentum MOMENTUM   Momentum, Default: 0.9
-  --weight-decay WEIGHT_DECAY, --wd WEIGHT_DECAY
+  --weight-decay WEIGHT_DECAY
                         Weight decay, Default: 1e-4
   --pretrained PRETRAINED
-                        path to pretrained model (default: none)
+                        Path to pretrained model
+  --train_data TRAIN_DATA
+                        Path to preprocessed train dataset
+  --test_data TEST_DATA
+                        Path to file containing test images
 ```
 ## Contributed by:
 * [Ayush Gupta](https://github.com/ayush12gupta)
