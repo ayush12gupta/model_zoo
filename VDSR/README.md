@@ -13,6 +13,16 @@ $ python3 main.py --Epochs 100
 %run dataset.py
 %run main.py --Epochs 100
 ```
+**Arguments for dataset.py**
+```
+usage: dataset.py [-h] [--dir DIR] [--out_dir OUT_DIR]
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --dir DIR          path to the dataset directory
+  --out_dir OUT_DIR  path for the output directory to produce
+```
+**Arguments for main.py**
 ```
 usage: main.py [-h] [--batchSize BATCHSIZE] [--Epochs EPOCHS] [--lr LR]
                [--step STEP] [--start-epoch START_EPOCH]
