@@ -1,7 +1,7 @@
 # Pytorch Implementation of VDSR 
 ## Usage
 
-We are using [this dataset](http://www.wisdom.weizmann.ac.il/%7Evision/SpaceTimeActions.html) which you need to extact and place all the files in a file named data. 
+We are using the dataset given in the official implementation [page](https://cv.snu.ac.kr/research/VDSR/) which you need to extact and give as an argument for dataset generation for use. 
 
 ```bash
 $ python3 dataset.py
