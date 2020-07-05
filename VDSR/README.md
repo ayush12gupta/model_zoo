@@ -22,6 +22,7 @@ optional arguments:
   --dir DIR          path to the dataset directory
   --out_dir OUT_DIR  path for the output directory to produce
 ```
+Can even use [train.h5](https://www.dropbox.com/s/p6awz5pogl52wfh/train.h5?dl=0) it contains preprocessed data on 91I dataset
 **Arguments for main.py**
 ```
 usage: main.py [-h] [--batchSize BATCHSIZE] [--Epochs EPOCHS] [--lr LR]
